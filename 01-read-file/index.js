@@ -6,9 +6,9 @@ const fileName = 'text.txt';
 
 const displayFile = (name) => {
   const filePath = path.join(__dirname, name);
-  const readableStream = createReadStream(filePath);
-  readableStream.on('data', (chunk) => stdout.write(chunk));
-  readableStream.on('error', (err) => stdout.write('Error: ', err.message));
+  const stream = createReadStream(filePath);
+  stream.on('data', (chunk) => stdout.write(chunk));
+  stream.on('error', (err) => stdout.write('Error: ', err.message));
 };
 
 displayFile(fileName);
