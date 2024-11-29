@@ -1,19 +1,18 @@
 const { readdir, stat } = require('fs/promises');
 const path = require('path');
 
-const dirName = 'secret-folder';
+const dirPath = path.join(__dirname, 'secret-folder');
 
-const displayDir = async (name) => {
-  const dirPath = path.join(__dirname, name);
+const displayDirFiles = async (dirPath) => {
   const options = { withFileTypes: true, recursive: true };
   const result = [];
   try {
     const files = await readdir(dirPath, options);
     for (const file of files) {
       if (file.isFile()) {
-        const fileStat = await stat(path.join(file.path, file.name));
-        const ext = path.extname(file.name);
-        const name = path.basename(file.name, ext);
+        const filePath = path.join(file.path, file.name);
+        const fileStat = await stat(filePath);
+        const { name, ext } = path.parse(filePath);
         const size = fileStat.size;
         result.push({ name, extension: ext.slice(1), size });
       }
@@ -25,4 +24,4 @@ const displayDir = async (name) => {
   console.table(result);
 };
 
-displayDir(dirName);
+displayDirFiles(dirPath);

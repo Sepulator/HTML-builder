@@ -2,10 +2,9 @@ const { stdout, stdin } = require('process');
 const { createWriteStream } = require('fs');
 const path = require('path');
 
-const fileName = 'text.txt';
+const filePath = path.join(__dirname, 'text.txt');
 
-const writeFile = (name) => {
-  const filePath = path.join(__dirname, name);
+const writeFile = (filePath) => {
   const stream = createWriteStream(filePath);
   stdout.write('Hello Anonymous!\n');
   stdin.on('data', (data) => {
@@ -17,4 +16,4 @@ const writeFile = (name) => {
   process.on('exit', () => stdout.write('\nGoodbye Anonymous!'));
 };
 
-writeFile(fileName);
+writeFile(filePath);
