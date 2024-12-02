@@ -5,6 +5,10 @@ const srcDirPath = path.join(__dirname, 'files');
 const outDirPath = path.join(__dirname, 'files-copy');
 const options = { withFileTypes: true, recursive: true };
 
+/**
+ * @param {string} srcDirPath
+ * @param {string} outDirPath
+ **/
 const copyDir = async (srcDirPath, outDirPath) => {
   const files = await readdir(srcDirPath, options);
   mkdir(outDirPath, { recursive: true });

@@ -6,6 +6,10 @@ const srcPath = path.join(__dirname, 'styles');
 const outPath = path.join(__dirname, 'project-dist', 'bundle.css');
 const options = { withFileTypes: true };
 
+/**
+ * @param {string} srcPath
+ * @param {string} outPath
+ */
 const mergeStyles = async (srcPath, outPath) => {
   const output = createWriteStream(outPath);
   try {
@@ -24,3 +28,5 @@ const mergeStyles = async (srcPath, outPath) => {
 };
 
 mergeStyles(srcPath, outPath);
+
+module.exports = mergeStyles;
