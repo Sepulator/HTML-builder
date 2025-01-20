@@ -4,7 +4,7 @@ const path = require('path');
 const dirPath = path.join(__dirname, 'secret-folder');
 
 const displayDirFiles = async (dirPath) => {
-  const options = { withFileTypes: true, recursive: true };
+  const options = { withFileTypes: true };
   const result = [];
   try {
     const files = await readdir(dirPath, options);
@@ -13,7 +13,7 @@ const displayDirFiles = async (dirPath) => {
         const filePath = path.join(file.path, file.name);
         const fileStat = await stat(filePath);
         const { name, ext } = path.parse(filePath);
-        const size = fileStat.size;
+        const size = (fileStat.size / 1024).toFixed(2) + ' KB';
         result.push({ name, extension: ext.slice(1), size });
       }
     }
